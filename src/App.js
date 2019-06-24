@@ -7,7 +7,6 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import HomeNavigation from './navigation/HomeNavigation';
 
 class App extends Component {
