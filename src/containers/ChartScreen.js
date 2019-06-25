@@ -3,9 +3,10 @@ import {
   View, Text, StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import { loadedPrices } from '../actions/btc';
+import { loadedPrices, changeCurrencyOnFocus } from '../actions/btc';
 import Color from '../constants/colors';
 import { BarSymbols } from './components/BarSymbols';
+import { Price } from '../components/Price';
 
 class ChartScreen extends Component {
   static navigationOptions = () => {
@@ -26,17 +27,27 @@ class ChartScreen extends Component {
     }
   };
   componentWillMount () {
-    this.props.loadedPrices();
+    setTimeout( () => {
+      this.props.loadedPrices();
+    }, 300);
+  }
+
+  onChangeCurrencyOnFocus = (parCurrencyOnFocus) => {
+    const { changeCurrencyOnFocus } = this.props;
+    changeCurrencyOnFocus({ parCurrencyOnFocus });
   }
 
   render () {
-    const { dataBTC = {}, loading = true } = this.props;
+    const { dataBTC = {}, loading = true, parCurrencyOnFocus = {} } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.titleApp}>
           Pound
         </Text>
-        { !loading && <BarSymbols dataBTC={dataBTC} /> }
+        <View style={{ flex: 1 }}>
+          { !loading && <BarSymbols dataBTC={dataBTC} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={this.onChangeCurrencyOnFocus} /> }
+          { !loading && <Price parCurrencyOnFocus={parCurrencyOnFocus} /> }
+        </View>
       </View>
     );
   };
@@ -58,11 +69,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   loading: state.btc.loading,
-  dataBTC: state.btc.dataBTC
+  dataBTC: state.btc.dataBTC,
+  parCurrencyOnFocus: state.btc.parCurrencyOnFocus
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadedPrices: () => dispatch(loadedPrices())
+  loadedPrices: () => dispatch(loadedPrices()),
+  changeCurrencyOnFocus: ({ parCurrencyOnFocus }) => dispatch(changeCurrencyOnFocus({ parCurrencyOnFocus }))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChartScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(ChartScreen);

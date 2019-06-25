@@ -5,20 +5,20 @@ import {
 } from 'react-native';
 import { Symbol } from '../../components/Symbol';
 
-export const BarSymbols = ({ dataBTC = {} }) => {
-  console.log('dataBTC.names ', dataBTC);
+export const BarSymbols = ({ dataBTC = {}, parCurrencyOnFocus = {}, onChangeCurrencyOnFocus }) => {
   return (
     <FlatList
+      style={{ borderColor: 'red', borderWidth: 3, height: 20 }}
       data={dataBTC}
       keyExtractor={item => item.key}
       renderItem={({item}) => {
-        console.log(item.currency);
         return (
           <View style={{ marginHorizontal: 10 }}>
-            <Symbol symbol={item.currency} />
+            <Symbol parCurrencyBTC={item} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={onChangeCurrencyOnFocus} />
           </View>
         )
       }}
+      showsVerticalScrollIndicator={false}
       initialNumToRender={3}
       removeClippedSubviews
       horizontal

@@ -1,10 +1,20 @@
 export const LOADING_PRICES = 'LOADING_PRICES';
 export const LOADED_PRICES = 'LOADED_PRICES';
+export const CHANGE_PRESED_CURRENCY = 'CHANGE_PRESED_CURRENCY';
+
 import { getPricesDiferentCurrencies } from '../networking/api/btc.networking';
 
 export const loadingPrices = () => ({
   type: LOADING_PRICES
 })
+
+export const changeCurrencyOnFocus = ({ parCurrencyOnFocus }) => ({
+  type: CHANGE_PRESED_CURRENCY,
+  payload: {
+    parCurrencyOnFocus
+  }
+});
+
 
 export const loadedDataBTC = ({ dataBTC }) => ({
   type: LOADED_PRICES,
@@ -21,5 +31,4 @@ export const loadedPrices = () => async (dispatch) => {
   } catch (e) {
     console.log(e);
   }
-
 }

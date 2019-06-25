@@ -5,14 +5,18 @@ import {
 } from 'react-native';
 import Colors from '../constants/colors';
 
-export const Symbol = (props) => (
-  <TouchableOpacity>
-    { props.symbol === 'ARS' ?
+export const Symbol = ({ parCurrencyBTC, parCurrencyOnFocus, onChangeCurrencyOnFocus = () => null }) => {
+  console.log(parCurrencyBTC);
+  return (
+    <TouchableOpacity onPress={() => onChangeCurrencyOnFocus(parCurrencyBTC)}>
+    { parCurrencyBTC.currency === parCurrencyOnFocus.currency ?
       <Text style={{ color: Colors.second }}>
-        BTC / { props.symbol }
+      BTC / { parCurrencyBTC.currency }
       </Text> : <Text style={{ color: Colors.textHome }}>
-        BTC / { props.symbol }
+      BTC / { parCurrencyBTC.currency }
       </Text>
     }
-  </TouchableOpacity>
-)
+    </TouchableOpacity>
+  )
+
+}
