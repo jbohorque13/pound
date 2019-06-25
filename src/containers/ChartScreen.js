@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {
   View, Text, StyleSheet
 } from 'react-native';
+import { connect } from 'react-redux';
+import { loadedPrices } from '../actions/btc';
 import Color from '../constants/colors';
-import { BarPrices } from './components/BarPrices';
+import { BarSymbols } from './components/BarPrices';
 
-export default class ChartScreen extends Component {
+class ChartScreen extends Component {
   static navigationOptions = () => {
     return {
       headerStyle:  {
@@ -22,15 +24,19 @@ export default class ChartScreen extends Component {
       headerTransparent: true,
       tabBarVisible: false
     }
+  };
+  componentWillMount () {
+    this.props.loadedPrices();
   }
 
   render () {
+    const { dataBTC = {}, loading = true } = this.props;
     return (
       <View style={styles.container}>
         <Text style={styles.titleApp}>
           Pound
         </Text>
-        <BarPrices />
+        { !loading && <BarSymbols dataBTC={dataBTC} /> }
       </View>
     );
   };
@@ -49,3 +55,14 @@ const styles = StyleSheet.create({
     margin: 10
   }
 })
+
+const mapStateToProps = state => ({
+  loading: state.btc.loading,
+  dataBTC: state.btc.dataBTC
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadedPrices: () => dispatch(loadedPrices())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChartScreen)

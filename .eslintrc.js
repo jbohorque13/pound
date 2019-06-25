@@ -36,7 +36,6 @@ module.exports = {
       "error",
       "always"
     ],
-    /* Advanced Rules*/
     "no-unused-expressions": "warn",
     "no-useless-concat": "warn",
     "block-scoped-var": "error",

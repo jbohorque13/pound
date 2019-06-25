@@ -5,14 +5,15 @@ import {
 } from 'react-native';
 import { Symbol } from '../../components/Symbol';
 
-export const BarPrices = () => {
+export const BarSymbols = ({ dataBTC = {} }) => {
   return (
     <FlatList
-      data={[{key: 'USD$'}, {key: 'ARS'}]}
+      data={Object.keys(dataBTC.names)}
+      keyExtractor={item => item.key}
       renderItem={({item}) => {
         return (
           <View style={{ marginHorizontal: 10 }}>
-            <Symbol symbol={item.key} />
+            <Symbol symbol={item} />
           </View>
         )
       }}
