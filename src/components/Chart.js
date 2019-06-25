@@ -15,7 +15,7 @@ const chartConfig = {
 const data = {
   labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
   datasets: [{
-    data: [ 20, 45, 28, 80, 99, 80 ],
+    data: [ 3500, 3400, 4300, 5500, 6000, 10000 ],
     color: (opacity = 1) => `rgba(251, 176, 59, ${opacity})` // optional
   }]
 }
@@ -25,7 +25,7 @@ export const ChartCustom = () => {
     <LineChart
       data={data}
       width={screenWidth}
-      height={220}
+      height={300}
       chartConfig={chartConfig}
     />
   )

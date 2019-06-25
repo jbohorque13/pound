@@ -45,18 +45,18 @@ class ChartScreen extends Component {
         <Text style={styles.titleApp}>
           Pound
         </Text>
-        <View style={{ flex: 1 }}>
-          <View style={{ flex: 0.5 }}>
+        <View style={styles.body}>
+          <View style={styles.containerSymbols}>
             { !loading && <BarSymbols dataBTC={dataBTC} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={this.onChangeCurrencyOnFocus} /> }
           </View>
           { !loading && <Price parCurrencyOnFocus={parCurrencyOnFocus} /> }
-            <View style={{ flex: 3, justifyContent: 'flex-end' }}>
+            <View style={styles.containerChart}>
               <ChartCustom />
             </View>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={styles.row}>
               <TouchableOpacity style={styles.buttonWelcome}>
                   <Text style={styles.textButton}>
-                      Entrar
+                      Entrar a mi Wallet
                   </Text>
               </TouchableOpacity>
             </View>
@@ -72,24 +72,43 @@ const styles = StyleSheet.create({
     backgroundColor: Color.main,
     padding: 10
   },
+  body: {
+    flex: 1
+  },
+  containerSymbols: {
+    flex: 0.5
+  },
+  containerChart: {
+    flex: 4,
+    justifyContent: 'center'
+  },
   titleApp: {
     fontFamily: 'Lato-Bold',
-    fontSize: 22,
+    fontSize: 24,
     color: Color.textHome,
     textAlign: 'center',
-    margin: 10
+    marginTop: 20,
+    marginBottom: 30
+  },
+  row: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonWelcome: {
     backgroundColor: '#fff',
     width: 160,
     height: 40,
     borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
     alignContent: 'center'
   },
   textButton: {
+    fontFamily: 'Lato-Bold',
     textAlign: 'center',
     color: '#000',
-    fontSize: 18
+    fontSize: 14
   }
 })
 
