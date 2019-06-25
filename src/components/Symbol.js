@@ -1,10 +1,18 @@
 import React from 'react';
 import {
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
+import Colors from '../constants/colors';
 
 export const Symbol = (props) => (
-  <Text>
-    { props.symbol }
-  </Text>
+  <TouchableOpacity>
+    { props.symbol === 'ARS' ?
+      <Text style={{ color: Colors.second }}>
+        BTC / { props.symbol }
+      </Text> : <Text style={{ color: Colors.textHome }}>
+        BTC / { props.symbol }
+      </Text>
+    }
+  </TouchableOpacity>
 )

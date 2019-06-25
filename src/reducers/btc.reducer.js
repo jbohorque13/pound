@@ -17,9 +17,22 @@ export default (state = initialState, action) => {
         loading: true
       }
     case LOADED_PRICES:
+      let paresBTC = action.payload.dataBTC.names;
+      const dataBTC = Object.keys(action.payload.dataBTC.names).map(row => {
+        if (action.payload.dataBTC.rates[`${row}_BUY`] && action.payload.dataBTC.rates[`${row}_SELL`]) {
+          paresBTC[row][`${row}_BUY`] = action.payload.dataBTC.rates[`${row}_BUY`];
+          paresBTC[row][`${row}_SELL`] = action.payload.dataBTC.rates[`${row}_SELL`];
+          paresBTC[row]['currency'] = row;
+          return paresBTC[row];
+        }
+      }).filter(value => {
+        if (value) {
+          return value;
+        }
+      });
       return {
         ...state,
-        dataBTC: action.payload.dataBTC,
+        dataBTC,
         loading: false,
         error: null
       }

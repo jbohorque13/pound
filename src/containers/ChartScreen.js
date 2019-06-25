@@ -5,7 +5,7 @@ import {
 import { connect } from 'react-redux';
 import { loadedPrices } from '../actions/btc';
 import Color from '../constants/colors';
-import { BarSymbols } from './components/BarPrices';
+import { BarSymbols } from './components/BarSymbols';
 
 class ChartScreen extends Component {
   static navigationOptions = () => {
