@@ -7,13 +7,13 @@ export const Price = ({ parCurrencyOnFocus }) => {
     <View style={styles.container}>
       <View style={styles.row}>
         <CurrencySymbol currencySymbol={parCurrencyOnFocus.symbol} />
-        <Text style={{ color: '#fff'}}>
+        <Text style={styles.priceText}>
             { parCurrencyOnFocus.BUY }
         </Text>
       </View>
       <View style={styles.row}>
         <CurrencySymbol currencySymbol={parCurrencyOnFocus.symbol} />
-        <Text style={{ color: '#fff'}}>
+        <Text style={styles.priceText}>
           { parCurrencyOnFocus.SELL }
         </Text>
       </View>
@@ -23,15 +23,19 @@ export const Price = ({ parCurrencyOnFocus }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 4,
+    flex: 2,
     flexDirection: 'row',
-    borderColor: 'blue',
-    borderWidth: 1
+    marginTop: 10
   },
   row: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-start',
     flexDirection: 'row'
+  },
+  priceText: {
+    fontFamily: 'Lato',
+    color: '#fff',
+    fontSize: 18
   }
 });

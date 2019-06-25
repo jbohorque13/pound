@@ -8,7 +8,6 @@ import { Symbol } from '../../components/Symbol';
 export const BarSymbols = ({ dataBTC = {}, parCurrencyOnFocus = {}, onChangeCurrencyOnFocus }) => {
   return (
     <FlatList
-      style={{ borderColor: 'red', borderWidth: 3, height: 20 }}
       data={dataBTC}
       keyExtractor={item => item.key}
       renderItem={({item}) => {

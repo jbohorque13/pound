@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet
+  View, Text, StyleSheet, TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
 import { loadedPrices, changeCurrencyOnFocus } from '../actions/btc';
 import Color from '../constants/colors';
 import { BarSymbols } from './components/BarSymbols';
 import { Price } from '../components/Price';
+import { ChartCustom } from '../components/Chart';
 
 class ChartScreen extends Component {
   static navigationOptions = () => {
@@ -45,9 +46,21 @@ class ChartScreen extends Component {
           Pound
         </Text>
         <View style={{ flex: 1 }}>
-          { !loading && <BarSymbols dataBTC={dataBTC} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={this.onChangeCurrencyOnFocus} /> }
+          <View style={{ flex: 0.5 }}>
+            { !loading && <BarSymbols dataBTC={dataBTC} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={this.onChangeCurrencyOnFocus} /> }
+          </View>
           { !loading && <Price parCurrencyOnFocus={parCurrencyOnFocus} /> }
-        </View>
+            <View style={{ flex: 3, justifyContent: 'flex-end' }}>
+              <ChartCustom />
+            </View>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <TouchableOpacity style={styles.buttonWelcome}>
+                  <Text style={styles.textButton}>
+                      Entrar
+                  </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
       </View>
     );
   };
@@ -60,10 +73,23 @@ const styles = StyleSheet.create({
     padding: 10
   },
   titleApp: {
+    fontFamily: 'Lato-Bold',
     fontSize: 22,
     color: Color.textHome,
     textAlign: 'center',
     margin: 10
+  },
+  buttonWelcome: {
+    backgroundColor: '#fff',
+    width: 160,
+    height: 40,
+    borderRadius: 60,
+    alignContent: 'center'
+  },
+  textButton: {
+    textAlign: 'center',
+    color: '#000',
+    fontSize: 18
   }
 })
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  StyleSheet
 } from 'react-native';
 import Colors from '../constants/colors';
 
 export const Symbol = ({ parCurrencyBTC, parCurrencyOnFocus, onChangeCurrencyOnFocus = () => null }) => {
-  console.log(parCurrencyBTC);
   return (
     <TouchableOpacity onPress={() => onChangeCurrencyOnFocus(parCurrencyBTC)}>
     { parCurrencyBTC.currency === parCurrencyOnFocus.currency ?
@@ -20,3 +20,9 @@ export const Symbol = ({ parCurrencyBTC, parCurrencyOnFocus, onChangeCurrencyOnF
   )
 
 }
+
+const styles = StyleSheet.create({
+  textSymbol: {
+    fontWeight: '100'
+  }
+})
