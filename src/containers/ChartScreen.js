@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { loadedPrices, changeCurrencyOnFocus } from '../actions/btc';
+import { loadedOperationsReady } from '../actions/operations';
 import Color from '../constants/colors';
 import { BarSymbols } from './components/BarSymbols';
 import { Price } from '../components/Price';
@@ -28,9 +29,11 @@ class ChartScreen extends Component {
     }
   };
   componentWillMount () {
+    const { loadedPrices, loadedOperationsReady } = this.props;
     setTimeout( () => {
-      this.props.loadedPrices();
+      loadedPrices();
     }, 300);
+    loadedOperationsReady();
   }
 
   onChangeCurrencyOnFocus = (parCurrencyOnFocus) => {
@@ -125,7 +128,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadedPrices: () => dispatch(loadedPrices()),
-  changeCurrencyOnFocus: ({ parCurrencyOnFocus }) => dispatch(changeCurrencyOnFocus({ parCurrencyOnFocus }))
+  changeCurrencyOnFocus: ({ parCurrencyOnFocus }) => dispatch(changeCurrencyOnFocus({ parCurrencyOnFocus })),
+  loadedOperationsReady: () => dispatch(loadedOperationsReady())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChartScreen);

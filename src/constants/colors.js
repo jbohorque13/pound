@@ -1,5 +1,5 @@
 module.exports = {
-  main: '#2c9afa',
+  main: '#0189ff',
   second: '#fbb03b',
   title: '#12252d',
   textHome: '#ffffff'

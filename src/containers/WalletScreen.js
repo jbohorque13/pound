@@ -8,6 +8,7 @@ import { loadedDataWallet } from '../actions/wallet';
 
 import Color from '../constants/colors';
 import { HeaderWalletInfo } from './components/HeaderWalletInfo';
+import { OperationRow } from './components/OperationRow';
 
 class WalletScreen extends Component {
   static navigationOptions = () => {
@@ -38,14 +39,21 @@ class WalletScreen extends Component {
   }
 
   render () {
-    const { dataWallet = {}, priceBTCARS = null } = this.props;
+    const { dataWallet = {}, priceBTCARS = null, operations } = this.props;
+    console.log('operations ', operations.operations);
     return (
       <View style={styles.container}>
         <FlatList
           ListHeaderComponent={<HeaderWalletInfo dataWallet={dataWallet} priceBTCARS={priceBTCARS} />}
           onScroll={this.onListScroll}
-          data={[]}
-          renderItem={row => console.log(row)}
+          data={operations.operations.map((section, index) => { section.key = index.toString(); return section })}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.operationContainer}>
+                <OperationRow operation={item} />
+              </View>
+            )
+          }}
           scrollEventThrottle={2}
         />
       </View>
@@ -56,8 +64,7 @@ class WalletScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.main,
-    padding: 10
+    backgroundColor: Color.textHome
   },
   titleApp: {
     fontFamily: 'Lato-Bold',
@@ -66,6 +73,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
     marginBottom: 30
+  },
+  operationContainer: {
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderColor: '#f5f5f5'
   },
   row: {
     flex: 1,
@@ -93,7 +105,8 @@ const mapStateToProps = state => ({
   loading: state.btc.loading,
   dataBTC: state.btc.dataBTC,
   priceBTCARS: state.btc.priceBTCARS,
-  dataWallet: state.wallet.dataWallet
+  dataWallet: state.wallet.dataWallet,
+  operations: state.operations.operations
 });
 
 const mapDispatchToProps = dispatch => ({

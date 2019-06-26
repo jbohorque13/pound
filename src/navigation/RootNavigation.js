@@ -1,9 +1,9 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation';
-import ChartScreen from '../containers/ChartScreen';
+import { createDrawerNavigator, createAppContainer } from 'react-navigation';
 import { WalletNavigation } from './WalletNavigation';
+import { HomeNavigation } from './HomeNavigation';
 
-const RootNavigation = createStackNavigator({
-  Chart: { screen: ChartScreen },
+const RootNavigation = createDrawerNavigator({
+  Home: { screen: HomeNavigation },
   Wallet: { screen: WalletNavigation }
 });
 

@@ -4,10 +4,11 @@ import {
   LineChart
 } from 'react-native-chart-kit';
 const screenWidth = Dimensions.get('window').width
+import Colors from '../constants/colors';
 
 const chartConfig = {
-  backgroundGradientFrom: '#2c99f8',
-  backgroundGradientTo: '#2c99f8',
+  backgroundGradientFrom: Colors.main,
+  backgroundGradientTo: Colors.main,
   color: (opacity = 0) => `rgba(0, 0, 0, ${opacity})`,
   strokeWidth: 2 // optional, default 3
 }
