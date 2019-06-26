@@ -10,7 +10,7 @@ export const Symbol = ({ parCurrencyBTC, parCurrencyOnFocus, onChangeCurrencyOnF
   return (
     <TouchableOpacity onPress={() => onChangeCurrencyOnFocus(parCurrencyBTC)}>
     { parCurrencyBTC.currency === parCurrencyOnFocus.currency ?
-      <Text style={styles.textSymbol}>
+      <Text style={[styles.textSymbol, { color: Colors.second }]}>
         BTC / { parCurrencyBTC.currency }
       </Text> : <Text style={styles.textSymbol}>
         BTC / { parCurrencyBTC.currency }
@@ -23,6 +23,7 @@ export const Symbol = ({ parCurrencyBTC, parCurrencyOnFocus, onChangeCurrencyOnF
 
 const styles = StyleSheet.create({
   textSymbol: {
+    fontFamily: 'Lato',
     fontWeight: '100',
     color: Colors.textHome
   }

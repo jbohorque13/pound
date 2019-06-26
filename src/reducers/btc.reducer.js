@@ -7,6 +7,7 @@ import {
 const initialState = {
   loading: true,
   dataBTC: {},
+  priceBTCARS: null,
   parCurrencyOnFocus: {},
   error: null
 }
@@ -21,6 +22,7 @@ export default (state = initialState, action) => {
     case LOADED_PRICES:
       let paresBTC = action.payload.dataBTC.names;
       let parCurrencyOnFocus = null;
+      let priceBTCARS = null;
 
       const dataBTC = Object.keys(action.payload.dataBTC.names).map(row => {
         if (action.payload.dataBTC.rates[`${row}_BUY`] && action.payload.dataBTC.rates[`${row}_SELL`]) {
@@ -29,6 +31,7 @@ export default (state = initialState, action) => {
           paresBTC[row]['currency'] = row;
           if (row === 'ARS') {
             parCurrencyOnFocus = paresBTC[row];
+            priceBTCARS = action.payload.dataBTC.rates[`${row}_SELL`].toFixed(5);
           }
           return paresBTC[row];
         }
@@ -37,16 +40,15 @@ export default (state = initialState, action) => {
           return value;
         }
       });
-      console.log('áscdscdscsd ', parCurrencyOnFocus);
       return {
         ...state,
         dataBTC,
         parCurrencyOnFocus,
+        priceBTCARS,
         loading: false,
         error: null
       }
     case CHANGE_PRESED_CURRENCY:
-      console.log(action.payload.parCurrencyOnFocus);
       return {
         ...state,
         parCurrencyOnFocus: action.payload.parCurrencyOnFocus

@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import HomeNavigation from './navigation/HomeNavigation';
+import RootNavigation from './navigation/RootNavigation';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <HomeNavigation />
+        <RootNavigation />
       </ Provider>
     );
   }

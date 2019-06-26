@@ -19,7 +19,6 @@ export const BarSymbols = ({ dataBTC = {}, parCurrencyOnFocus = {}, onChangeCurr
       }}
       showsVerticalScrollIndicator={false}
       initialNumToRender={3}
-      removeClippedSubviews
       horizontal
     />
   )

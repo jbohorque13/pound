@@ -38,6 +38,11 @@ class ChartScreen extends Component {
     changeCurrencyOnFocus({ parCurrencyOnFocus });
   }
 
+  onPressWallet = () => {
+    console.log('hola');
+    this.props.navigation.navigate('Wallet');
+  }
+
   render () {
     const { dataBTC = {}, loading = true, parCurrencyOnFocus = {} } = this.props;
     return (
@@ -54,7 +59,7 @@ class ChartScreen extends Component {
               <ChartCustom />
             </View>
             <View style={styles.row}>
-              <TouchableOpacity style={styles.buttonWelcome}>
+              <TouchableOpacity onPress={this.onPressWallet} style={styles.buttonWelcome}>
                   <Text style={styles.textButton}>
                       Entrar a mi Wallet
                   </Text>
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
   },
   buttonWelcome: {
     backgroundColor: '#fff',
-    width: 160,
+    width: 180,
     height: 40,
     borderRadius: 60,
     justifyContent: 'center',
