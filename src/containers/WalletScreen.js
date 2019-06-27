@@ -45,12 +45,17 @@ class WalletScreen extends Component {
     })
   }
 
+  onPressSendBTC = () => {
+    const { navigation } = this.props;
+    navigation.navigate('SendBTC');
+  }
+
   render () {
     const { dataWallet = {}, priceBTCARS = null, operations } = this.props;
     return (
       <View style={styles.container}>
         <FlatList
-          ListHeaderComponent={<HeaderWalletInfo dataWallet={dataWallet} priceBTCARS={priceBTCARS} />}
+          ListHeaderComponent={<HeaderWalletInfo onPressSendBTC={this.onPressSendBTC} dataWallet={dataWallet} priceBTCARS={priceBTCARS} />}
           onScroll={this.onListScroll}
           data={operations.operations.map((section, index) => { section.key = index.toString(); return section })}
           renderItem={({ item }) => {

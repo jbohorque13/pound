@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Colors from '../../constants/colors';
 
-export const HeaderWalletInfo = ({ dataWallet = {}, priceBTCARS = null }) => {
+export const HeaderWalletInfo = ({ dataWallet = {}, priceBTCARS = null, onPressSendBTC = () => null }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.titleApp}>
@@ -20,7 +20,7 @@ export const HeaderWalletInfo = ({ dataWallet = {}, priceBTCARS = null }) => {
         </Text>
       </View>
       <View style={styles.containerIconsOperations}>
-        <TouchableOpacity style={styles.containerIconOption}>
+        <TouchableOpacity onPress={() => onPressSendBTC()} style={styles.containerIconOption}>
           <Image style={styles.image} source={require('../../../assets/images/mail.png')} />
           <Text style={styles.textIcon}>
               Enviar

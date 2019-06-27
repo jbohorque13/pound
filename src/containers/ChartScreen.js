@@ -42,7 +42,6 @@ class ChartScreen extends Component {
   }
 
   onPressWallet = () => {
-    console.log('hola');
     this.props.navigation.navigate('Wallet');
   }
 
@@ -105,7 +104,7 @@ const styles = StyleSheet.create({
   },
   buttonWelcome: {
     backgroundColor: '#fff',
-    width: 180,
+    width: '80%',
     height: 40,
     borderRadius: 60,
     justifyContent: 'center',

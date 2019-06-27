@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   },
   containerDescriptionOperation: {
     flex: 3,
-    alignItems: 'center',
     paddingHorizontal: 10
   },
   containerAmountSend: {
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
   textDescription: {
     fontFamily: 'Lato-Bold',
     fontSize: 12,
+    textAlign: 'center',
     color: '#ccc'
   },
   textTitle: {
