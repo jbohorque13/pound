@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, Image
+  View, Text, StyleSheet, Image, TouchableOpacity
 } from 'react-native';
 
-export const OperationRow = ({ operation }) => {
+export const OperationRow = ({ operation, onPressDetailOperation = () => null }) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={() => onPressDetailOperation({ operation })} style={styles.container}>
       <View style={styles.containerImage}>
         <Image style={styles.image} source={require('../../../assets/images/mail.png')} />
       </View>
@@ -22,7 +22,7 @@ export const OperationRow = ({ operation }) => {
             {operation.amount} BTC
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

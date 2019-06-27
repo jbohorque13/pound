@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Colors from '../../constants/colors';
 
 export const HeaderWalletInfo = ({ dataWallet = {}, priceBTCARS = null }) => {
@@ -20,18 +20,18 @@ export const HeaderWalletInfo = ({ dataWallet = {}, priceBTCARS = null }) => {
         </Text>
       </View>
       <View style={styles.containerIconsOperations}>
-        <View style={styles.containerIconOption}>
+        <TouchableOpacity style={styles.containerIconOption}>
           <Image style={styles.image} source={require('../../../assets/images/mail.png')} />
           <Text style={styles.textIcon}>
               Enviar
           </Text>
-        </View>
-        <View style={styles.containerIconOption}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.containerIconOption}>
           <Image style={styles.image} source={require('../../../assets/images/incomes.png')} />
           <Text style={styles.textIcon}>
               Recibir
           </Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

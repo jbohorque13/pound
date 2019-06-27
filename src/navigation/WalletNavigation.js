@@ -4,4 +4,5 @@ import OperationDetailScreen from '../containers/OperationDetailScreen';
 
 export const WalletNavigation = createStackNavigator({
   Wallet: { screen: WalletScreen },
+  OperationDetail: { screen: OperationDetailScreen }
 });

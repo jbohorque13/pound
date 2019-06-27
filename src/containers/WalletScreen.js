@@ -38,9 +38,15 @@ class WalletScreen extends Component {
 
   }
 
+  onPressDetailOperation = ({ operation }) => {
+    const { navigation } = this.props;
+    navigation.navigate('OperationDetail', {
+      operation
+    })
+  }
+
   render () {
     const { dataWallet = {}, priceBTCARS = null, operations } = this.props;
-    console.log('operations ', operations.operations);
     return (
       <View style={styles.container}>
         <FlatList
@@ -50,7 +56,7 @@ class WalletScreen extends Component {
           renderItem={({ item }) => {
             return (
               <View style={styles.operationContainer}>
-                <OperationRow operation={item} />
+                <OperationRow operation={item} onPressDetailOperation={this.onPressDetailOperation} />
               </View>
             )
           }}

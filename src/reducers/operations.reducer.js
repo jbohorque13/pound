@@ -1,5 +1,6 @@
 import {
-  LOADED_OPERATIONS_READY
+  LOADED_OPERATIONS_READY,
+  SAVE_OPERATION
 } from '../actions/operations';
 import operations from '../constants/operations';
 
@@ -15,6 +16,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         operations,
         loading: false
+      }
+    case SAVE_OPERATION:
+      return {
+        ...state,
+        operation: [...state.operation, ...action.payload.operation]
       }
     default:
       return state;
