@@ -1,5 +1,6 @@
 import {
-  LOADED_DATA_WALLET
+  LOADED_DATA_WALLET,
+  CHANGE_DATA_WALLET
 } from '../actions/wallet';
 import { getRandom } from '../utils';
 
@@ -19,6 +20,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         dataWallet,
         loading: false,
+      }
+    case CHANGE_DATA_WALLET:
+      const dataWalletNew = {
+        amountBTC: action.payload.amountBTC.toFixed(5)
+      }
+      return {
+        ...state,
+        dataWallet: dataWalletNew,
       }
     default:
       return state;

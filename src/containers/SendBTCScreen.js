@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, StyleSheet, Text, TouchableOpacity, Dimensions, ScrollView
+  View, StyleSheet, Text, TouchableOpacity, Dimensions, ScrollView, Alert
 } from 'react-native';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -11,6 +11,7 @@ import TextInputCustom from './components/TextInputCustom';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { getRandom, getHashRandom, getAddressRandom } from '../utils';
 import { saveOperation } from '../actions/operations';
+import { changeDataWallet } from '../actions/wallet';
 
 const width = Dimensions.get('window').width;
 
@@ -77,10 +78,10 @@ class SendBTCScreen extends Component {
       amountBTC: amountBTC.toFixed(5)
     })
   }
-  onSaveOperation = () => {
-    const { amountBTC = 0, amountARS = 0, fee = 0, address } = this.state;
-    const { navigation, saveOperation = () => null } = this.props;
-    if (amountBTC !== 0 && amountARS !== 0 && address !== ''){
+  onSaveOperation = (myFounds) => {
+    const { amountBTC = 0, amountARS = 0, fee = 0, address, showAlert } = this.state;
+    const { navigation, saveOperation = () => null, changeDataWallet = () => null } = this.props;
+    if (amountBTC > 0 && amountARS > 0 && address !== ''){
       const operation = {
         id: getRandom(5, 20).toFixed(0),
         date: moment().format('DD-MM-YYYY'),
@@ -91,7 +92,10 @@ class SendBTCScreen extends Component {
         status: 1
       }
       saveOperation({ operation });
-      this.changeAlert();
+      changeDataWallet(myFounds);
+      this.setState({
+        showAlert: !showAlert
+      });
       navigation.navigate('Wallet');
     }
   }
@@ -105,11 +109,11 @@ class SendBTCScreen extends Component {
 
   render () {
     const { amountARS = 0, amountBTC = 0, address = '', fee = '', showAlert } = this.state;
-    const { priceBTCARS = '' } = this.props;
-    const { dataWallet = {} } = this.props;
-
+    const { priceBTCARS = '', dataWallet = {} } = this.props;
+    const myFounds = dataWallet.amountBTC - fee - amountBTC;
     return (
       <ScrollView style={styles.container}>
+
         <KeyboardAwareScrollView style={styles.container}>
           <View style={styles.headerInfoData}>
 
@@ -160,24 +164,31 @@ class SendBTCScreen extends Component {
               <View style={styles.amountMyWallet}>
                 <Icon name='wallet' style={styles.icon} size={30} />
                 <Text style={styles.textAmountBTC}>
-                    Mi saldo 0.125632 BTC
+                    Mi saldo { myFounds } BTC
                 </Text>
               </View>
               <View style={styles.containerButtonSend}>
-                <TouchableOpacity onPress={() => this.changeAlert()} disabled={(amountBTC !== 0 && amountARS !== 0 && address !== '') ? false : true} style={[styles.buttonSend, (amountBTC !== 0 && amountARS !== 0 && address !== '') ? {opacity: 1 }: {opacity: 0.5}]}>
+                <TouchableOpacity onPress={() => {
+                  if (myFounds > 0) {
+                    this.changeAlert();
+                  } else {
+                    Alert.alert(
+                      'No tienes suficiente fondos en tu Wallet'
+                    );
+                  }
+                }} disabled={(amountBTC > 0 && amountARS > 0 && address !== '') ? false : true} style={[styles.buttonSend, (amountBTC > 0 && amountARS > 0 && address !== '') ? {opacity: 1 }: {opacity: 0.5}]}>
                   <Text style={styles.textSend}>
                     Enviar
                   </Text>
                 </TouchableOpacity>
               </View>
           </View>
-
         </KeyboardAwareScrollView>
         <AwesomeAlert
           show={showAlert}
           showProgress={false}
           title="Envío"
-          message="Estas seguro de hacer está transación ?"
+          message="¿ Estas seguro de hacer está transacción ?"
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showCancelButton={true}
@@ -186,10 +197,10 @@ class SendBTCScreen extends Component {
           confirmText="Aceptar"
           confirmButtonColor="#0189ff"
           onCancelPressed={() => {
-            this.onSaveOperation();
+            this.changeAlert();
           }}
           onConfirmPressed={() => {
-            this.onSaveOperation();
+            this.onSaveOperation(myFounds);
           }}
         />
       </ScrollView>
@@ -304,7 +315,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveOperation: ({ operation }) => dispatch(saveOperation({ operation }))
+  saveOperation: ({ operation }) => dispatch(saveOperation({ operation })),
+  changeDataWallet: ( amountBTC ) => dispatch(changeDataWallet( amountBTC ))
 });
 
 
