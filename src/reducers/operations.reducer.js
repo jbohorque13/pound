@@ -2,7 +2,7 @@ import {
   LOADED_OPERATIONS_READY,
   SAVE_OPERATION
 } from '../actions/operations';
-import operations from '../constants/operations';
+import operationsInitial from '../constants/operations';
 
 const INITIAL_STATE = {
   operations: [],
@@ -14,14 +14,15 @@ export default (state = INITIAL_STATE, action) => {
     case LOADED_OPERATIONS_READY:
       return {
         ...state,
-        operations,
+        operations: operationsInitial.operations,
         loading: false
       }
     case SAVE_OPERATION:
+      const operations = [action.payload.operation, ...state.operations];
       return {
         ...state,
-        operation: [...state.operation, ...action.payload.operation]
-      }
+        operations
+      };
     default:
       return state;
   }

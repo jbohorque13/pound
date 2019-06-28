@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, TouchableOpacity
+  View, Text, StyleSheet, TouchableOpacity, ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { loadedPrices, changeCurrencyOnFocus } from '../actions/btc';
@@ -54,9 +54,9 @@ class ChartScreen extends Component {
         </Text>
         <View style={styles.body}>
           <View style={styles.containerSymbols}>
-            { !loading && <BarSymbols dataBTC={dataBTC} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={this.onChangeCurrencyOnFocus} /> }
+            { !loading ? <BarSymbols dataBTC={dataBTC} parCurrencyOnFocus={parCurrencyOnFocus} onChangeCurrencyOnFocus={this.onChangeCurrencyOnFocus} /> : <ActivityIndicator animating color='white' size='small' /> }
           </View>
-          { !loading && <Price parCurrencyOnFocus={parCurrencyOnFocus} /> }
+          { !loading ? <Price parCurrencyOnFocus={parCurrencyOnFocus} /> : <ActivityIndicator animating color='white' size='small' />}
             <View style={styles.containerChart}>
               <ChartCustom />
             </View>

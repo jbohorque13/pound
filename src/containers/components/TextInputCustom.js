@@ -5,11 +5,11 @@ import {
   TextInput
 } from 'react-native';
 
-
 const TextInputCustom = ({
   styleContainer = {},
   styleTextInput = {},
   stylesText = {},
+  keyboardType = 'string',
   placeholder = '',
   textLabel = '',
   placeholderTextColor = '',
@@ -22,12 +22,13 @@ const TextInputCustom = ({
     <Text style={stylesText}> { textLabel } </Text>
     <TextInput
       style={styleTextInput}
-      value={0}
+      value={value}
+      keyboardType={keyboardType}
       placeholder={placeholder}
       placeholderTextColor={placeholderTextColor}
       editable = {true}
       maxLength = {30}
-      onChange={() => onChangeText()}
+      onChangeText={(text) => onChangeText({ text })}
     />
   </View>
 );

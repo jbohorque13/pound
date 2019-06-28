@@ -34,10 +34,6 @@ class WalletScreen extends Component {
     this.props.loadedPrices();
   }
 
-  onListScroll = event => {
-
-  }
-
   onPressDetailOperation = ({ operation }) => {
     const { navigation } = this.props;
     navigation.navigate('OperationDetail', {
@@ -56,8 +52,7 @@ class WalletScreen extends Component {
       <View style={styles.container}>
         <FlatList
           ListHeaderComponent={<HeaderWalletInfo onPressSendBTC={this.onPressSendBTC} dataWallet={dataWallet} priceBTCARS={priceBTCARS} />}
-          onScroll={this.onListScroll}
-          data={operations.operations.map((section, index) => { section.key = index.toString(); return section })}
+          data={operations.map((section, index) => { section.key = index.toString(); return section })}
           renderItem={({ item }) => {
             return (
               <View style={styles.operationContainer}>
